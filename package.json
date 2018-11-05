@@ -1,0 +1,25 @@
+{
+  "name": "vue-toutiao",
+  "version": "1.0.0",
+  "description": "vue 编写头条webapp",
+  "main": "index.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --port 8090",
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freedong/vue-toutiao.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/freedong/vue-toutiao/issues"
+  },
+  "homepage": "https://github.com/freedong/vue-toutiao#readme",
+  "devDependencies": {
+    "cross-env": "^5.2.0",
+    "webpack": "^4.25.0",
+    "webpack-dev-server": "^3.1.10"
+  }
+}
