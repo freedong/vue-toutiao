@@ -1,6 +1,7 @@
 <template>
 	<header>
 		<!-- 命名插槽 -->
+		<!-- home页面插槽 -->
 		<slot name="home"></slot>
 	</header>
 </template>
