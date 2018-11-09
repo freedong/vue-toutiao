@@ -31,9 +31,13 @@
 		<el-alert v-show="!ifReturnMsg" class="newsLoadError" title="暂无更新..." type="error" description="此频道暂无更新，请先休息一下！" show-icon></el-alert>
 
 		<!-- 内容区 -->
-		<transtion enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">
-
-		</transtion>
+		<!-- transition是vue的内置组件  过度效果 -->
+		<transition enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">
+			<!-- animated这个类是Animate.css的样式 -->
+			<ul class="newsContent animated" v-show="!loading&&ifReturnMsg">
+				你好
+			</ul>
+		</transition>
 		<!-- 点击加载更多 -->
 		<div></div>
 		<!-- 返回顶部 -->
@@ -45,19 +49,43 @@
 </template>
 
 <script>
+	//引用时间插件
+	import moment from 'moment'
 	//引用组件
 	import headerBar from '../components/header-bar.vue'
 	import bottomNav from '../components/bottom-nav.vue'
 	//引用状态state
 	import {
-		mapGetters
+		mapState,		//状态
+		mapGetters,	//重新计算状态
+		mapActions  //Action 提交的是 mutation，而不是直接变更状态 (方法)
 	} from 'vuex'
+	//注释：mapState和mapGetters放在组件的计算属性computed中映射,mapActions和mapMotations放在组件中方法methods中映射
+
+	//引用mutatin-type
+	import * as type from '../store/mutation-types.js'
+	//引用数据请求axios
+	import axios from 'axios'
 	export default {
 		computed:{
 			...mapGetters([
-					'loading',
-					'ifReturnMsg',
-				]),
+				'loading',
+				'ifReturnMsg',
+				'list',
+				'routerChange',
+			]),
+		},
+		methods:{
+			...mapActions([
+				'getNews',
+			])
+		},
+		mounted () {
+			this.getNews({
+				kind:this.first,
+				flag:this.routerChange
+			});
+			console.log("mounted Home");
 		},
 		components:{
 			headerBar,
@@ -121,7 +149,7 @@
                     type: 'news_fashion'
                 },
             ],
-
+				first:window.location.search.substring(6),
 
 
 			}
@@ -201,6 +229,57 @@
     margin: 2.3rem auto;
     font-size: 25px;
     width: 90%;
+}
+
+
+.newsContent {
+    margin-top: 2.3rem;
+    width: 100%;
+    .newsDetaile {
+        width: 94%;
+        display: block;
+        position: relative;
+        margin: 0 auto;
+        padding-bottom: 0.15rem;
+        .borderBottom(1px,#ccc);
+        .title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #000;
+            padding-top: 0.2rem;
+            padding-bottom: 0.15rem;
+        }
+        img {
+            width: 31.1%;
+            margin-right: 0.21rem;
+            height: 2.3rem;
+        }
+        .bottomInfo {
+            font-size: 10px;
+            margin-top: 0.15rem;
+            .writer {
+                color: #000;
+            }
+            .comment_count {
+                color: #000;
+            }
+            .datetime {
+                float: right;
+                color: #000;
+            }
+            .avIcon {
+                display: inline-block;
+                height: 0.4rem;
+                width: 0.9rem;
+                text-align: center;
+                line-height: 0.4rem;
+                border-radius: 4px;
+                border: 1px solid #39f;
+                font-size: 10px;
+                margin-right: 0.1rem;
+            }
+        }
+    }
 }
 
 </style>
