@@ -7,3 +7,8 @@ export const GET_NEWSLIST = 'GET_NEWSLIST'  //新闻列表信息
 export const CHANGE_LOADING_STATE = 'CHANGE_LOADING_STATE' //loading状态的切换
 
 export const RETURN = 'RETURN'   //判断是否有请求数据返回
+
+export const PULLDOWNBTN = 'PULLDOWNBTN'   //控制下拉加载数据的按钮
+
+
+export const ROUTERCHANGE = 'ROUTERCHANGE'   //判断路有变化

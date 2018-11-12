@@ -3,6 +3,7 @@ const getters = {
   ifReturnMsg:state => state.ifReturnMsg,
   list:state => state.list,
   routerChange:state => state.routerChange,
+  downLoadMore:state => state.downLoadMore,
 };
 
 

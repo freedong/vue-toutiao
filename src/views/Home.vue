@@ -35,13 +35,44 @@
 		<transition enter-active-class="bounceInLeft" leave-active-class="bounceOutRight">
 			<!-- animated这个类是Animate.css的样式 -->
 			<ul class="newsContent animated" v-show="!loading&&ifReturnMsg">
-				你好
+				<router-link v-for="(val,index) in listCon" :to="{ name:'newsdetail',params:
+						{   id:val.tag_id,
+								title:val.title,
+								media_info:val.media_info,
+								media_name:val.media_name,
+								datetime:val.datetime,
+								abstract:val.abstract,
+								image_list:val.image_list,
+								repin_count:val.repin_count,
+								comment_count:val.comment_count,
+								keywords:val.keywords
+						}}" :key="index" class="newsDetaile">
+					<p class="title">{{val.title}}</p>
+					<div class="">
+						<img alt="加载出错" v-for="(img,index) in val.image_list" :key="index" v-lazy="img.url">
+						<div class="bottomInfo clearfix">
+							<Icon type="ios-thumbs-up" size="10" color="#d43d3d" v-show="val.hot===1"></Icon>
+							<span class="avIcon" v-show="val.label==='广告'">广告</span>
+							<span class="writer">{{val.media_name}}</span>&nbsp;&nbsp;
+							<span class="comment_count">评论&nbsp;{{val.comment_count}}</span>
+							<span class="datetime">{{val.datetime|date}}</span>
+						</div>
+					</div>
+				</router-link>
 			</ul>
 		</transition>
 		<!-- 点击加载更多 -->
-		<div></div>
+		<div class="pulldownload" v-show="downLoadMore" @click="pulldownloadmore({kind:first || $router.query.type,flag:downLoadMore})">
+			点击加载更多
+		</div>
 		<!-- 返回顶部 -->
-		<div></div>
+		<transition name="bounce" enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+			<to-top class="animated bounce" v-show="top">
+				<!-- <div class="top">
+					<Icon type="android-arrow-up"></Icon>
+				</div> -->
+			</to-top>
+		</transition>
 
 		<!-- 底部导航栏 -->
 		<bottom-nav></bottom-nav>
@@ -54,6 +85,7 @@
 	//引用组件
 	import headerBar from '../components/header-bar.vue'
 	import bottomNav from '../components/bottom-nav.vue'
+	import toTop from '../components/To-top.vue'
 	//引用状态state
 	import {
 		mapState,		//状态
@@ -73,12 +105,50 @@
 				'ifReturnMsg',
 				'list',
 				'routerChange',
+				'downLoadMore',
+				'routerChange'
 			]),
+			listCon:function(){
+				if(this.$route.query.type){
+					return this.list[this.$route.query.type]
+				}else {
+					return this.list[this.first]
+				}
+			}
+		},
+		// beforeRouteUpdate(2.2 新增)  在当前路由改变，但是该组件被复用时调用
+		beforeRouteUpdate(to,from,next){
+			this.$store.commit(type.PULLDOWNBTN,false);
+			next();
 		},
 		methods:{
 			...mapActions([
 				'getNews',
-			])
+				'pulldownloadmore'
+			]),
+			handleScroll(){
+				this.top = window.document.documentElement.scrollTop > 10;
+				// this.top = window.document.body.scrollTop > 400;
+				console.log("scroll");
+				console.log(this.top);
+				// console.log(window.document.body.scrollTop);
+				console.log(window.document.documentElement.scrollTop);
+			},
+		},
+		watch:{
+			'$route':function(){
+				this.getNews({
+					kind:this.$route.query.type,
+					flag:this.routerChange
+				});
+				if(this.routerChange){
+					this.$store.commit(type.CHANGE_LOADING_STATE,true)
+				}else{
+					this.$store.commit(type.CHANGE_LOADING_STATE,false)
+				}
+				this.first = window.location.search.substring(6);
+				this.$store.commit(type.ROUTERCHANGE,true);
+			},
 		},
 		mounted () {
 			this.getNews({
@@ -86,10 +156,22 @@
 				flag:this.routerChange
 			});
 			console.log("mounted Home");
+			window.addEventListener('scroll',this.handleScroll);
 		},
 		components:{
 			headerBar,
-			bottomNav
+			bottomNav,
+			toTop
+		},
+
+		filters:{
+			date:function(input){
+				if(!input){
+					return ''
+				}
+				var time = moment(input).startOf('minute').fromNow();
+				return time;
+			}
 		},
 		data () {
 			return {
@@ -150,7 +232,7 @@
                 },
             ],
 				first:window.location.search.substring(6),
-
+				top:false,
 
 			}
 		},
@@ -280,6 +362,16 @@
             }
         }
     }
+}
+
+.pulldownload {
+    margin-bottom: 1.3rem;
+    width: 100%;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    color: #000;
+    font-size: 18px;
+    text-align: center;
 }
 
 </style>

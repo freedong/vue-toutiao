@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '../views/Home.vue'
+import Home from '../views/Home.vue'	//首页
+import Newsdetail from '../views/newsDetail.vue'	//新闻详情页
 
 
 Vue.use(Router);
@@ -16,10 +17,15 @@ const routes = [
         redirect: '/home/all?type=__all__'
     },
     {
-		path:'/home/:type',
-		name:'home',
-		component:Home
-	}
+			path:'/home/:type',
+			name:'home',
+			component:Home
+		},
+		{
+			path:'/newsdetail/:id',
+			name:'newsdetail',
+			component:Newsdetail
+		}
 ];
 
 const scrollBehavior = (to,from,savedPosition) => {

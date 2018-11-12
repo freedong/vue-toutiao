@@ -3,6 +3,8 @@
 		<!-- 命名插槽 -->
 		<!-- home页面插槽 -->
 		<slot name="home"></slot>
+		<!-- 新闻详情页插槽 -->
+		<slot name="detail-header"></slot>
 	</header>
 </template>
 
