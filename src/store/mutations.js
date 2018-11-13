@@ -33,6 +33,34 @@ const mutations = {
   [type.ROUTERCHANGE](state,sign){
     state.routerChange = sign;
   },
+
+
+
+  // 判断share分享组件是否展开
+  [type.SHOWSHAREBOX](state,sign){
+    state.Sharebox = sign;
+  },
+
+  // 判断是否收藏
+  [type.COLLECTED](state,sign){
+    state.collected = sign;
+  },
+
+  // 登陆和退出
+  [type.LOGINING](state,payload){
+    state.logined = payload;
+  },
+
+  // 渲染用户名数据
+  [type.GETUSERDATA](state,res){
+    state.userName = res;
+  },
+
+  // 是否展示退出登录按钮
+  [type.SHOWLOGOFF](state,sign){
+    state.SHOWLOGOFF = sign;
+  }
+
 };
 
 

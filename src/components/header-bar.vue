@@ -5,6 +5,10 @@
 		<slot name="home"></slot>
 		<!-- 新闻详情页插槽 -->
 		<slot name="detail-header"></slot>
+		<!-- 设置页面插槽 -->
+		<slot name="setup-header"></slot>
+		<!-- 收藏页面插槽 -->
+		<slot name="collect"></slot>
 	</header>
 </template>
 

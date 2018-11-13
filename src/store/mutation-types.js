@@ -12,3 +12,19 @@ export const PULLDOWNBTN = 'PULLDOWNBTN'   //控制下拉加载数据的按钮
 
 
 export const ROUTERCHANGE = 'ROUTERCHANGE'   //判断路有变化
+
+
+
+export const SHOWSHAREBOX = 'SHOWSHAREBOX'   //share分享组件是否显示
+
+
+export const COLLECTED = 'COLLECTED'   //判断是否收藏
+
+
+export const GETUSERDATA = 'GETUSERDATA'   //渲染用户名数据
+
+
+export const LOGINING = 'LOGINING'   //登陆和退出
+
+
+export const SHOWLOGOFF = 'SHOWLOGOFF'  //是否显示退出登录

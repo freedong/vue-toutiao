@@ -148,6 +148,7 @@
 				}
 				this.first = window.location.search.substring(6);
 				this.$store.commit(type.ROUTERCHANGE,true);
+				// this.$store.commit(type.COLLECTED,false);
 			},
 		},
 		mounted () {

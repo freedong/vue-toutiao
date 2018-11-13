@@ -35,7 +35,7 @@
     <!-- 评论 -->
     <comment :comment="comment_count"></comment>
     <!-- 分享 -->
-    <share></share>
+    <share :show="Sharebox"></share>
   </div>
 </template>
 
@@ -56,7 +56,7 @@ export default {
   data () {
     return {
       title:this.$route.params.title,
-      // media_info:this.$route.params.media_info
+      media_info:this.$route.params.media_info
     }
   },
   components:{
@@ -71,10 +71,22 @@ export default {
       this.$router.go(-1);
       console.log(this.routerChange+'2');//false
     },
+    showSharebox:function(){
+      this.$store.commit(type.SHOWSHAREBOX,!this.Sharebox);
+      console.log(this.media_info);
+    },
+  },
+  watch:{
+    // 路由发生变化的时候  分享组件隐藏
+    '$route':function(){
+      this.$store.commit(type.SHOWSHAREBOX,false)
+      // this.$store.commit(type.COLLECTED,false)
+    }
   },
   computed:{
     ...mapGetters([
       'routerChange',
+      'Sharebox',
     ]),
     media_name:function(){
       if(this.$route.params.media_name){

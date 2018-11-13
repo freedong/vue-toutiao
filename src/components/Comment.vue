@@ -1,7 +1,7 @@
 <template lang="html">
   <div id="comment">
     <!-- 输入框 -->
-    <el-input class="editComment" placeholder="写评论..." icon="md-create"></el-input>
+    <el-input class="editComment" placeholder="写评论..." suffix-icon="el-icon-edit"></el-input>
     <!-- 分享 -->
     <Icon type="md-share-alt" color="#d43d3d" size="30" class="commentInco fr" @click.native="showSharebox"></Icon>
     <!-- 收藏状态的转换 -->
@@ -16,13 +16,58 @@
 </template>
 
 <script>
+import * as type from '../store/mutation-types.js'
+import {
+  mapGetters
+} from 'vuex'
 export default {
   props:['comment'],
   data(){
     return {
       commentNum:this.comment>0?this.comment:'0',
+      // 是否收藏  为false
+      collected:this.$route.params.collected
     }
   },
+  computed:{
+    ...mapGetters([
+      'collected',
+      'logined'
+    ])
+  },
+  methods:{
+    showSharebox:function(){
+      this.$store.commit(type.SHOWSHAREBOX,true)
+    },
+    t(){
+      // if(this.collected){
+      //   this.collected = false;
+      //   console.log(this.collected);
+      // }else{
+      //   this.collected = true;
+      //   console.log(this.collected);
+      // }
+      this.collected = !this.collected;
+      // console.log("是否收藏！！");
+      // console.log(this.collected);
+    },
+    tocomment(){
+      if(this.logined){
+          alert('暂无评论功能')
+      }else{
+        const _this = this;
+        this.$confirm('登录后才能发表评论, 是否前往登录?','提示',{
+          confirmButtonText:'确定',
+          cancelButtonText:'取消',
+          type:'warning'
+        }).then(()=>{
+          _this.$router.push({path:'/my'});
+        }).catch(()=>{
+          console.log("评论出错！");
+        });
+      }
+    },
+  }
 }
 </script>
 

@@ -46,6 +46,22 @@ const actions = {
       });
     }
   },
+
+
+  // 登录操作
+  setUserInfo({commit,state},res){
+    localStorage.setItem('userName',JSON.stringify(res));
+    localStorage.setItem('logined',true);
+    commit(type.LOGINING,true);
+    commit(type.GETUSERDATA,res);
+  },
+  // 退出登录操作
+  setSignOut({commit}){
+    localStorage.removeItem('userName');
+    localStorage.setItem('logined',false);
+    commit(type.LOGINING,false);
+    commit(type.SHOWLOGOFF,false);
+  },
 };
 
 export default actions;

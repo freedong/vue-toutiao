@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/router.js' //路由
 import store from './store/index.js'  //状态
-
+Vue.config.devtools = true;
 
 // 引用css动画库
 import animate from 'animate.css'
