@@ -68,6 +68,9 @@ export default {
         console.log(err);
       });
     },
+    goBack(){
+      this.$router.go(-1);
+    },
   },
   // 页面加载就调用
   created(){

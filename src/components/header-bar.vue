@@ -9,6 +9,14 @@
 		<slot name="setup-header"></slot>
 		<!-- 收藏页面插槽 -->
 		<slot name="collect"></slot>
+		<!-- 关注页面插槽 -->
+		<slot name="care"></slot>
+		<!-- 编辑资料页面插槽 -->
+		<slot name="editprofile-header"></slot>
+		<!-- 我的主页插槽 -->
+		<slot name="selfpage"></slot>
+		<!-- 搜索页面 -->
+		<slot name="search"></slot>
 	</header>
 </template>
 

@@ -1,6 +1,6 @@
 <template lang="html">
 	<ul class="nav">
-		<router-link to="/home/" class="navItems">
+		<router-link to="/home/all?type=__all__" class="navItems">
 			<div class="bottom_nav_icon icon_1"></div>
 			<div class="bottom_nav_text">首页</div>
 		</router-link>

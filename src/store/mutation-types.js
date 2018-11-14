@@ -28,3 +28,6 @@ export const LOGINING = 'LOGINING'   //登陆和退出
 
 
 export const SHOWLOGOFF = 'SHOWLOGOFF'  //是否显示退出登录
+
+
+export const CHANGEINTRODUCE = 'CHANGEINTRODUCE'  //更改个人简介

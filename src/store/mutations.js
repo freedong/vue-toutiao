@@ -59,7 +59,13 @@ const mutations = {
   // 是否展示退出登录按钮
   [type.SHOWLOGOFF](state,sign){
     state.SHOWLOGOFF = sign;
-  }
+  },
+
+  // 更改个人简介
+  [type.CHANGEINTRODUCE](state,introduce){
+    state.introduce = introduce;
+    state.hasIntroduce = true;
+  },
 
 };
 

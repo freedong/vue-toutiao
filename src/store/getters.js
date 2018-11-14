@@ -10,6 +10,8 @@ const getters = {
   userName:state => state.userName,
   vitality:state => state.vitality,
   showLog_off:state => state.showLog_off,
+  introduce:state => state.introduce,
+  hasIntroduce:state => state.hasIntroduce,
 };
 
 

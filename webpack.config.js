@@ -1,5 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
+// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+// var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
@@ -58,6 +60,14 @@ module.exports = {
 			'muse-components':'muse-ui/src'
 		}
 	},
+	// plugins:[
+  //       new UglifyJsPlugin()
+  //   ],
+	// optimization: {
+	//  minimizer: [
+	// 	 new UglifyJsPlugin({ /* your config */ })
+	//  ]
+ // },
 	devServer:{
 		historyApiFallback:true,
 		noInfo:true

@@ -11,6 +11,8 @@ const state = {
   userName:JSON.parse(localStorage.getItem('userName')) || {},               //用户名字
   downLoadMore:false,        //首页新闻底部是否加载更多
   showLog_off: true,     //setup页退出登录是否显示
+  introduce:'',           //selfpage页个人简介内容
+  hasIntroduce:false,    //是否已有个人简介
   vitality: {            //my页个人信息（暂无用，等后续处理）
       follow: 14,
       fans: 0,
